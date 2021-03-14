@@ -1,0 +1,411 @@
+#+TITLE: Emacs config file in org format
+#+AUTHOR: John Lord
+#+PROPERTY: header-args :results silent :tangle "/home/john/.emacs.d/init.el"
+
+* Package Management
+#+begin_src elisp
+  (server-start)
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
+  (eval-when-compile (require 'use-package))
+#+end_src
+
+#+begin_src elisp
+  (use-package general
+    :ensure t
+    )
+#+end_src
+* Themes and Early inits
+#+begin_src elisp
+  (setq line-spacing 0.1)
+  (menu-bar-mode 1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq inhibit-startup-screen t)
+  (setq initial-scratch-message "")
+  (put 'narrow-to-region 'disabled nil)
+  (setq max-mini-window-height 0.5)
+  (setq help-window-select t)
+  (add-to-list 'display-buffer-alist
+           '("*Apropos*" display-buffer-same-window))
+#+end_src
+
+#+begin_src elisp
+  (use-package doom-themes
+    :ensure t
+    :config
+    ;; Global settings (defaults)
+    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+          doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    (load-theme 'doom-one t)
+    )
+#+end_src
+
+#+begin_src elisp
+  (use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode))
+#+end_src
+
+#+name: auth-source-pass
+#+begin_src elisp
+  (use-package auth-source-pass
+    :config
+    (auth-source-pass-enable)
+    (setq auth-source-debug t
+          auth-source-do-cache nil
+          auth-sources '(password-store)
+          )
+    )
+#+end_src
+
+#+name: undo-tree
+#+begin_src elisp :tangle no 
+  (use-package undo-tree
+    )
+#+end_src
+
+#+name: all-the-icons
+#+begin_src elisp
+  (use-package all-the-icons
+    )
+#+end_src
+
+* Evil
+#+name: evil
+#+begin_src elisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-emacs-state-cursor '("red" box)
+          evil-normal-state-cursor '("green" box)
+          evil-visual-state-cursor '("orange" box)
+          evil-insert-state-cursor '("red" bar)
+          evil-replace-state-cursor '("red" bar)
+          evil-operator-state-cursor '("red" hollow)
+          evil-want-keybinding nil
+          )
+    :config
+    (evil-mode 1)
+    )
+    ;; Make movement keys work like they should
+    (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+    (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+    (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+    (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+                                          ; Make horizontal movement cross lines
+    (setq-default evil-cross-lines t)
+#+end_src
+
+#+name: evil-collection
+#+begin_src elisp
+  (use-package evil-collection
+    :ensure t
+    :after evil
+    ;; :custom (evil-collection-setup-minibuffer t)
+    :init
+    (evil-collection-init)
+    )
+#+end_src
+
+* Completions and Projects
+#+name: counsel
+#+begin_src elisp
+  (use-package counsel
+    :ensure t
+    :config
+    (ivy-mode 1)
+    ;; (require 'ivy-hydra)
+    (setq ivy-use-virtual-buffers t
+          enable-recursive-minibuffers t
+          ivy-count-format "(%d/%d) "
+          )
+    (counsel-mode)
+    (global-set-key (kbd "C-s") 'swiper-isearch)
+    (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+    (global-set-key (kbd "M-y") 'counsel-yank-pop)
+    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+    (global-set-key (kbd "<f1> l") 'counsel-find-library)
+    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+    (global-set-key (kbd "<f2> j") 'counsel-set-variable)
+    (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
+    (global-set-key (kbd "C-c v") 'ivy-push-view)
+    (global-set-key (kbd "C-c V") 'ivy-pop-view)
+    )
+#+end_src
+
+#+name: counsel-projectile
+#+begin_src elisp
+  (use-package counsel-projectile
+    :ensure t
+    :config
+    (counsel-projectile-mode)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    )
+#+end_src
+
+#+name: company
+#+begin_src elisp
+  (use-package company
+    :ensure t
+    :diminish company-mode
+    :hook (after-init . global-company-mode)
+    :config
+    (add-to-list 'company-backends 'company-capf)
+    )
+#+end_src
+
+#+name: ivy-hydra
+#+begin_src elisp
+  (use-package ivy-hydra
+    :ensure t
+    )
+#+end_src
+
+#+name: which-key
+#+begin_src elisp
+  (use-package which-key
+    :ensure t
+    :config
+    (which-key-mode)
+    )
+#+end_src
+
+#+name: avy
+#+begin_src elisp
+  (use-package avy
+    :ensure t
+    :bind (
+    ("C-:" . avy-goto-char)
+    ("C-." . avy-goto-char-2))
+    )
+#+end_src
+
+* Org
+** org
+#+begin_src elisp
+  (use-package org
+    :bind (
+           ("C-c l" . org-store-link)
+           ("C-c a" . org-agenda)
+           ("C-c c" . org-capture)
+           )
+    :mode ("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode)
+    :config
+    (setq
+     org-directory "~/org/"
+     org-agenda-compact-blocks t
+     org-agenda-custom-commands
+     '(
+       ("h" "Agenda and home tasks"
+        ((agenda "")
+         (todo "NEXT" ((org-agenda-overriding-header "Next")))
+         (todo "TODO" ((org-agenda-overriding-header "Todo")))
+         (todo "WAITING" ((org-agenda-overriding-header "Waiting")))
+         (todo "SOMETIME" ((org-agenda-overriding-header "Sometime")))
+         )
+        )
+       )
+     org-agenda-dim-blocked-tasks nil
+     org-agenda-files '(
+                        "~/org/"
+                        "~/org/gtd/"
+                        )
+     org-agenda-tags-todo-honor-ignore-options t
+     org-agenda-todo-ignore-scheduled 'all
+     org-agenda-todo-ignore-deadlines 'all
+     org-capture-templates
+     '(
+       ("t" "Todo" entry (file "~/org/gtd/inbox.org") "* TODO %i%?")
+        )
+     org-duration-format (quote h:mm)
+     org-hide-emphasis-markers t
+     org-log-done 'time
+     org-log-into-drawer t
+     org-outline-path-complete-in-steps nil
+     org-refile-targets
+     '(
+       ("~/org/gtd/gtd.org" . (:maxlevel . 3))
+       ("~/org/gtd/maxwell.org" . (:maxlevel . 3))
+       )
+     org-refile-use-outline-path t
+     org-startup-indented t
+     org-tag-alist '(("@work" . ?w) ("@home" . ?h))
+     org-todo-keywords
+     '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "SOMETIME(s)" "|" "DONE(d)" "CANCELLED(c)"))
+     org-todo-keyword-faces
+     '(
+       ("TODO" :foreground "red" :weight bold)
+       ("NEXT" :foreground "light blue" :weight bold)
+       ("WAITING" :foreground "orange" :weight bold)
+       ("SOMETIME" :foreground "magenta" :weight bold)
+       ("DONE" :foreground "forest green" :weight bold)
+       ("CANCELLED" :foreground "forest green" :weight bold)
+       )
+     )
+    )
+#+end_src
+
+** evil-org
+#+begin_src elisp
+  (use-package evil-org
+    :ensure t
+    :after org
+    :hook (org-mode . (lambda () evil-org-mode))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys)
+    )
+#+end_src
+
+* Beancount
+#+begin_src elisp
+  (use-package beancount
+    :init
+    (add-hook 'beancount-mode-hook #'outline-minor-mode)
+    :load-path "~/.emacs.d/site-lisp/beancount-mode"
+    :mode ("\\.beancount\\'" . beancount-mode)
+    :general
+    (:states 'normal
+     :keymaps 'beancount-mode-map
+     "C-j" 'outline-next-visible-heading
+     "C-k" 'outline-previous-visible-heading
+                )
+    )
+#+end_src
+
+* Magit
+#+begin_src elisp
+  (use-package magit
+    :ensure t
+    :defer
+    )
+#+end_src
+
+* Dired
+#+name: dired
+#+begin_src elisp
+  (setq dired-listing-switches "-alh -v --group-directories-first"
+        dired-auto-revert-buffer t  ; don't prompt to revert; just do it
+        dired-dwim-target t  ; suggest a target for moving/copying intelligently
+        dired-hide-details-hide-symlink-targets nil
+        ;; Always copy/delete recursively
+        dired-recursive-copies  'always
+        dired-recursive-deletes 'top
+        ;; Ask whether destination dirs should get created when copying/removing files.
+        dired-create-destination-dirs 'ask
+        image-dired-thumb-size 150
+        )
+#+end_src
+
+#+name: dired-rsync
+#+begin_src elisp
+  (use-package dired-rsync
+    :ensure t
+    :config
+    (bind-key "C-c C-r" 'dired-rsync dired-mode-map)
+    ) 
+#+end_src
+
+#+name: diredfl
+#+begin_src elisp
+  (use-package diredfl
+    :ensure t
+    :hook (dired-mode . diredfl-mode)
+    ) 
+#+end_src
+
+* Parentheses
+#+name: highlight-parentheses
+#+begin_src elisp
+  (use-package highlight-parentheses
+    :ensure t
+    :config
+    (progn
+      (highlight-parentheses-mode)
+      (global-highlight-parentheses-mode))
+    )
+#+end_src
+
+#+begin_src elisp
+  (use-package smartparens
+    :ensure t
+    :config
+    (smartparens-global-mode)
+    )
+#+end_src
+* Latex
+#+name: auctex
+#+begin_src elisp
+  (use-package auctex
+    :ensure t
+    :defer t
+    :config
+    (setq TeX-auto-save t
+          TeX-parse-self t)
+    (setq-default TeX-engine 'xetex)
+    )
+#+end_src
+
+#+name: moderncv
+#+begin_src elisp :tangle no 
+  ;; (use-package general
+  ;; (use-package ox-moderncv
+  ;;   :straight (ox-moderncv :type git :host gitlab :repo "Titan-C/org-cv")
+  ;;   :init (require 'ox-moderncv)
+  ;;   )
+#+end_src
+
+* Python
+#+name: python
+#+begin_src elisp
+  (use-package elpy
+    :ensure t
+    :init
+    (elpy-enable)
+    :config
+    (setq python-indent-offset 4)
+    (setenv "WORKON_HOME" "~/src")
+    (setq python-shell-interpreter "jupyter"
+          python-shell-interpreter-args "console --simple-prompt"
+          python-shell-prompt-detect-failure-warning nil)
+    (add-to-list 'python-shell-completion-native-disabled-interpreters
+                 "jupyter")
+    )
+#+end_src
+
+#+name: ein
+#+begin_src elisp
+  (use-package ein
+    :ensure t
+   ) 
+#+end_src
+
+* Yaml
+#+name: yaml
+#+begin_src elisp
+  (use-package yaml-mode
+    :ensure t
+    )
+#+end_src
+
+* Terminals
+#+name: vterm
+#+begin_src elisp
+  (use-package vterm
+    :ensure t
+    ) 
+#+end_src
+
+* Local Variables
+;; Local Variables: 
+;; eval: (add-hook 'after-save-hook (lambda ()(if (y-or-n-p "Reload?")(load-file user-init-file))) nil t) 
+;; eval: (add-hook 'after-save-hook (lambda ()(if (y-or-n-p "Tangle?")(org-babel-tangle))) nil t) 
+;; End:
+
+
+
