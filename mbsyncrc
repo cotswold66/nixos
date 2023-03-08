@@ -1,0 +1,52 @@
+IMAPAccount personal
+Host imap.gmail.com
+User john@lordsonline.org
+PassCmd "gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.password-store/imap.gmail.com:587/john@lordsonline.org.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+#SSLVersions TLSv1.2
+#CertificateFile /etc/ssl/certs/ca-bundle.crt
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+#PipelineDepth 50
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+Path ~/.mail/org.lordsonline.john/
+
+Channel personal
+Far :personal-remote:"[Gmail]/All Mail"
+Near :personal-local:"."
+Create Both
+Expunge Both
+SyncState *
+CopyArrivalDate yes
+
+
+## ------------------------------------------------------------ 
+
+IMAPAccount business
+Host imap.gmail.com
+User john@lordpharmaconsulting.com
+PassCmd "gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.password-store/imap.gmail.com:587/john@lordpharmaconsulting.com.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+PipelineDepth 50
+
+IMAPStore business-remote
+Account business
+
+MaildirStore business-local
+Path ~/.mail/com.lordpharmaconsulting.john/
+
+Channel business
+Far :business-remote:"[Gmail]/All Mail"
+Near :business-local:"."
+Create Both
+Expunge Both
+SyncState *
+CopyArrivalDate yes
+
