@@ -1,5 +1,5 @@
 {
-  description = "NixOS and Home Manager onfigurations";
+  description = "NixOS and Home Manager configurations";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
