@@ -25,6 +25,8 @@
       ".config/foot/foot.ini".source = ./foot.ini;
       ".config/hypr/hyprland.conf".source = ./hyprland.conf;
       ".config/i3/config".source = ./i3-config;
+      ".config/sway/grimshot.sh".source = ./sway/grimshot.sh;
+      ".config/sway/homescreen.sh".source = ./sway/homescreen.sh;
       ".mbsyncrc".source = ./mbsyncrc;
       ".config/mutt" = {
         source = ./mutt;
@@ -90,6 +92,13 @@
 
   fonts.fontconfig.enable = true;
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    extraConfig = {
+      XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Screenshots";
+    };
+  };
 
 
   # Let Home Manager install and manage itself.
@@ -116,7 +125,6 @@
       SSH_AUTH_SOCK = /run/user/1000/keyring/ssh;
       LESS = "-R";
       # QT_AUTO_SCREEN_SCALE_FACTOR = 1;
-#      XDG_SCREENSHOTS_DIR = ~/Screenshots;
       # PLASMA_USE_QT_SCALING = 1;
       QT_QPA_PLATFORMTHEME = "qt5ct";
       VDPAU_DRIVER = "va_gl";
@@ -393,9 +401,10 @@
           "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
         };
       startup = [
-        { command = "firefox"; }
-        { command = "emacsclient -c"; }
-        { command = "foot"; }
+        # { command = "firefox"; }
+        # { command = "emacsclient -c"; }
+        # { command = "foot"; }
+        { command = "~/.config/sway/homescreen.sh"; }
         { command = "nm-applet --indicator"; }
         { command = "1password --ozone-platform-hint=auto --silent"; }
         { command = "pcloud"; }

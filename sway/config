@@ -26,7 +26,6 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-exec ~/.config/sway/homescreen.sh
 
 #font pango:Source Code Pro 11
 font Roboto 10

@@ -10,7 +10,7 @@ mode "$screenshot" {
 # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
-    bindsym $mod+Print mode "default"
+    bindsym Mod4+Print mode "default"
 }
 
-bindsym $mod+Print mode "$screenshot"
+bindsym Mod4+Print mode "$screenshot"
