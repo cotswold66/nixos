@@ -440,8 +440,8 @@
       startup = [
         { command = "~/.config/sway/homescreen.sh"; }
         { command = "nm-applet --indicator"; }
-        # { command = "${pkgs._1password-gui}/bin/1password --ozone-platform-hint=auto --silent"; }
-        { command = "${pkgs._1password-gui}/bin/1password --silent"; }
+        { command = "${pkgs._1password-gui}/bin/1password --ozone-platform-hint=auto --silent"; }
+        # { command = "${pkgs._1password-gui}/bin/1password --silent"; }
         { command = "pcloud"; }
         { command = "mako"; }
         { command = "wl-paste -t text --watch clipman store --no-persist"; }
