@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./chromium.nix
     ./foot.nix
   ];
   # Home Manager needs a bit of information about you and the
@@ -23,7 +24,6 @@
     };
     file = {
       ".config/alacritty/alacritty.yml".source = ./alacritty.yml;
-      ".config/chromium-flags.conf".source = ./chromium-flags.conf;
       ".config/electron-flags.conf".source = ./electron-flags.conf;
       ".config/hypr/hyprland.conf".source = ./hyprland.conf;
       ".config/i3/config".source = ./i3-config;
