@@ -1,6 +1,9 @@
 { config, pkgs, lib,... }:
 
 {
+  imports = [
+    ./foot.nix
+  ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -22,7 +25,6 @@
       ".config/alacritty/alacritty.yml".source = ./alacritty.yml;
       ".config/chromium-flags.conf".source = ./chromium-flags.conf;
       ".config/electron-flags.conf".source = ./electron-flags.conf;
-      ".config/foot/foot.ini".source = ./foot.ini;
       ".config/hypr/hyprland.conf".source = ./hyprland.conf;
       ".config/i3/config".source = ./i3-config;
       ".config/sway/grimshot.sh".source = ./sway/grimshot.sh;
@@ -50,7 +52,6 @@
       fd
       firefox-wayland
       font-awesome
-      foot
       ghostscript
       gnucash
       hack-font
