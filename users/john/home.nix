@@ -27,7 +27,6 @@
       ".config/electron-flags.conf".source = ./electron-flags.conf;
       ".config/hypr/hyprland.conf".source = ./hyprland.conf;
       ".config/i3/config".source = ./i3-config;
-      ".config/sway/grimshot.sh".source = ./sway/grimshot.sh;
       ".config/sway/homescreen.sh".source = ./sway/homescreen.sh;
       ".mbsyncrc".source = ./mbsyncrc;
       ".config/mutt" = {
@@ -343,13 +342,50 @@
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
-    extraConfig = builtins.readFile ./sway/config;
+    # extraConfig = builtins.readFile ./sway/config;
+    extraConfig = ''
+      # exec dex --autostart -s ~/.config/autostart/
+
+      # output * bg $HOME/.local/share/backgrounds/p51XiSX-linux-background.jpg fill
+
+      bindswitch --reload --locked lid:on output $laptop disable
+      bindswitch --reload --locked lid:off output $laptop enable
+
+      set $screenshot 1 save active, 2 save area, 3 save screen, 4 save window
+      mode "$screenshot" {
+        bindsym 1 exec 'grimshot --notify save active', mode "default"
+        bindsym 2 exec 'grimshot --notify save area', mode "default"
+        bindsym 3 exec 'grimshot --notify save output', mode "default"
+        bindsym 4 exec 'grimshot --notify save window', mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Mod4+Print mode "default"
+      }
+      bindsym Mod4+Print mode "$screenshot"
+    '';
     extraSessionCommands = ''
       export QT_QPA_PLATFORM=wayland
     '';
     config = rec {
+      assigns = {
+        "3" = [ { app_id = "virt-manager"; } { class = "zoom"; } ];
+        "6" = [{ app_id = "gnucash"; }];
+      };
+      floating.modifier = "Mod4";
       modifier = "Mod4";
       terminal = "foot";
+      fonts = {
+        names = [ "Roboto" ];
+        size = 10.0;
+      };
+      window.border = 5;
+      window.commands = [
+        { command = "floating enable"; criteria = { app_id = "dolphin"; }; }
+        { command = "floating enable"; criteria = { app_id = "virt-manager"; }; }
+        { command = "floating enable"; criteria = { class = "zoom"; }; }
+        { command = "floating enable"; criteria = { class = "1Password"; }; }
+      ];
       menu = "wofi --show drun --lines=5 --prompt='' | xargs swaymsg exec --";
       bars = [
         { command = "waybar"; }
@@ -387,8 +423,7 @@
         };
       keybindings =
         let
-          #mod = wayland.windowManager.sway.config.modifier;
-          mod = "Mod4";
+          mod = config.wayland.windowManager.sway.config.modifier;
         in lib.mkOptionDefault {
           "${mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Suspend' 'systemctl suspend' -b 'Lock' '$lockman' -b 'Shutdown' 'systemctl poweroff' -b 'Reboot' 'systemctl reboot' -b 'Yes, exit sway' 'swaymsg exit'";
           "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
@@ -400,14 +435,13 @@
           "Ctrl+${mod}+l" = "exec ${pkgs.swaylock}/bin/swaylock -c 550000";
           "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
           "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
+          "XF86AudioPlay" = "exec playerctl play-pause";
         };
       startup = [
-        # { command = "firefox"; }
-        # { command = "emacsclient -c"; }
-        # { command = "foot"; }
         { command = "~/.config/sway/homescreen.sh"; }
         { command = "nm-applet --indicator"; }
-        { command = "1password --ozone-platform-hint=auto --silent"; }
+        # { command = "${pkgs._1password-gui}/bin/1password --ozone-platform-hint=auto --silent"; }
+        { command = "${pkgs._1password-gui}/bin/1password --silent"; }
         { command = "pcloud"; }
         { command = "mako"; }
         { command = "wl-paste -t text --watch clipman store --no-persist"; }
