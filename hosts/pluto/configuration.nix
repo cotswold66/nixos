@@ -98,7 +98,6 @@
     description = "John Lord";
     extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      firefox-wayland
     ];
   };
  
