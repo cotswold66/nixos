@@ -11,9 +11,22 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
+  boot.loader = {
+    # systemd-boot = {
+    #   enable = true;
+    #   configurationLimit = 7;
+    #   consoleMode = "1";
+    # };
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+      gfxmodeEfi = "1024x768";
+      gfxpayloadEfi = "keep";
+      fontSize = 30;
+    };
+    efi.canTouchEfiVariables = true;
+  };
   networking.hostName = "pluto"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
