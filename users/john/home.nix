@@ -41,7 +41,7 @@
       ".vimrc".source = ./vimrc;
     };
     packages = with pkgs; [
-      _1password-gui
+      # _1password-gui
       bibata-cursors
       brightnessctl
       clipman
