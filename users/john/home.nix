@@ -468,7 +468,7 @@
         { command = "floating enable"; criteria = { app_id = "dolphin"; }; }
         { command = "floating enable"; criteria = { app_id = "virt-manager"; }; }
         { command = "floating enable"; criteria = { class = "zoom"; }; }
-        { command = "floating enable"; criteria = { class = "1Password"; }; }
+        { command = "floating enable"; criteria = { app_id = "1Password"; }; }
       ];
       menu = "wofi --show drun --lines=5 --prompt='' | xargs swaymsg exec --";
       bars = [
@@ -520,6 +520,8 @@
           "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
           "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
           "XF86AudioPlay" = "exec playerctl play-pause";
+          "Ctrl+Shift+l" = "exec 1password --ozone-platform-hint=auto --toggle";
+          "Ctrl+Shift+space" = "exec 1password --ozone-platform-hint=auto --quick-access";
         };
       startup = [
         { command = "~/.config/sway/homescreen.sh"; }
