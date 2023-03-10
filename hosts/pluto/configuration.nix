@@ -112,7 +112,7 @@
   users.users.john = {
     isNormalUser = true;
     description = "John Lord";
-    extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -127,9 +127,20 @@
   environment.systemPackages = with pkgs; [
     git
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    virt-manager
     wget
   ];
 
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      swtpm.enable = true;
+      ovmf.enable = true;
+    };
+  };
+
+  programs.dconf.enable = true;
+  
   programs._1password-gui = {
     enable = true;
     polkitPolicyOwners = [ "john" ];
