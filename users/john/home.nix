@@ -47,16 +47,21 @@
       digikam
       dolphin
       emacs
-      fd
+      fd                        # Search engine for emacs
       firefox-wayland
-      font-awesome
-      ghostscript
+      font-awesome              # Fonts used in waybar
+      fzf
+      ghostscript               # Needed for emacs doc-view
+      gnome.dconf-editor
       gnucash
+      gramps
       hack-font
       inconsolata
       isync
       libsForQt5.breeze-qt5
       libsForQt5.breeze-icons
+      libsForQt5.kmahjongg
+      libsForQt5.kshisen
       # libsForQt5.kaccounts-integration
       # libsForQt5.kaccounts-providers
       # libsForQt5.kio-gdrive
@@ -64,9 +69,13 @@
       # libsForQt5.qqc2-breeze-style
       # kwallet-pam
       # kwalletcli
+      libreoffice-fresh
       mako
+      mosh
+      mu
       networkmanagerapplet
       noto-fonts
+      osm-gps-map
       pass
       pcloud
       picmi
@@ -74,6 +83,7 @@
       # polkit-kde-agent
       qt5ct
       restic
+      ripgrep                   # Needed for emacs search
       roboto
       source-code-pro
       sway-contrib.grimshot
