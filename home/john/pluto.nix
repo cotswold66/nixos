@@ -1,10 +1,18 @@
-{ config, pkgs, lib,... }:
+{ inputs, config, pkgs, lib, outputs, ... }:
 
 {
   imports = [
     ./chromium.nix
     ./foot.nix
   ];
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+    };
+  };
+  
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -97,7 +105,6 @@
     stateVersion = "22.11";
   };
   
-  nixpkgs.config.allowUnfree = true;
 
   fonts.fontconfig.enable = true;
 
