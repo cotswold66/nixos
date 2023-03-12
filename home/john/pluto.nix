@@ -82,6 +82,7 @@
       mosh
       mu
       networkmanagerapplet
+      networkmanager-openvpn
       noto-fonts
       osm-gps-map
       pass
