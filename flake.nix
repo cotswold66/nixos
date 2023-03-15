@@ -10,28 +10,36 @@
 
   outputs = { self, home-manager, nixpkgs, nixos-hardware, ... }@inputs:
     let
-      inherit (self) outputs;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
-
-      nixosConfigurations = {
-        pluto = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/pluto/configuration.nix
-            nixos-hardware.nixosModules.dell-xps-13-9300
-          ];
+    in
+      { 
+        nixosConfigurations = {
+          pluto = nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = inputs;
+            modules = [
+              ./hosts/pluto/configuration.nix
+              nixos-hardware.nixosModules.dell-xps-13-9300
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.john = import ./home/john/pluto.nix;
+                  extraSpecialArgs = inputs;
+                };
+              }
+            ];
+          };
         };
+        
+        # homeConfigurations = {
+        #   "john@pluto" = home-manager.lib.homeManagerConfiguration {
+        #     inherit pkgs;
+        #     extraSpecialArgs = inputs;
+        #     modules = [ ./home/john/pluto.nix ];
+        #   };
+        # };
       };
-      
-      homeConfigurations = {
-        "john@pluto" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/john/pluto.nix ];
-        };
-      };
-    };
 }
