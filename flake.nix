@@ -14,32 +14,28 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
       { 
+        nixosModules = import ./modules { lib = nixpkgs.lib; }; 
         nixosConfigurations = {
           pluto = nixpkgs.lib.nixosSystem {
             inherit system;
-            specialArgs = inputs;
+            specialArgs = { inherit inputs; };
             modules = [
               ./hosts/pluto/configuration.nix
+              ./users/johnlord.nix
+              ./profiles/sway.nix
+              ./profiles/desktop.nix
+              ./profiles/common.nix
               nixos-hardware.nixosModules.dell-xps-13-9300
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
-                  users.john = import ./home/john/pluto.nix;
-                  extraSpecialArgs = inputs;
+                  extraSpecialArgs = { inherit inputs; };
                 };
               }
             ];
           };
         };
-        
-        # homeConfigurations = {
-        #   "john@pluto" = home-manager.lib.homeManagerConfiguration {
-        #     inherit pkgs;
-        #     extraSpecialArgs = inputs;
-        #     modules = [ ./home/john/pluto.nix ];
-        #   };
-        # };
       };
 }

@@ -1,7 +1,18 @@
 { config, pkgs, lib, ... }:
 
 {
-  home-manager.users.john = { pkgs, ... }: {
+  home-manager.users.john = { config, pkgs, ... }: {
+    
+    fonts.fontconfig.enable = true;
+    
+    xdg.userDirs = {
+      enable = true;
+      createDirectories = true;
+      extraConfig = {
+        XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Screenshots";
+      };
+    };
+    
     home = {
       sessionVariables = {
         EDITOR = "${pkgs.emacs}/bin/emacsclient -c";
@@ -43,6 +54,17 @@
         xorg.xlsclients
       ];
     };
+    services.emacs = {
+      enable = true;
+    };
+    programs.gpg = {
+      enable = true;
+    };
+    services.gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 86400;
+      maxCacheTtl = 86400;
+      pinentryFlavor = "curses";
+    };
   };
-  
 }

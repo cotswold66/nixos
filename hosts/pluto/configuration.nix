@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
-  imports =
+  imports = with inputs.self.nixosModules;
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # ../../modules/users/johnlord.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -53,19 +54,6 @@
     LC_TIME = "en_US.UTF-8";
   };
   
-  xdg = {
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
-      ];
-    };
-  };
-
-  # Allow swaylock to unlock the computer for us
-  security.pam.services.swaylock = {
-    text = "auth include login";
-  };
 
   console = {
 #    font = "ter-132b";
@@ -109,13 +97,13 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.john = {
-    isNormalUser = true;
-    description = "John Lord";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-    ];
-  };
+  # users.users.john = {
+  #   isNormalUser = true;
+  #   description = "John Lord";
+  #   extraGroups = [ "networkmanager" "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
+  #   packages = with pkgs; [
+  #   ];
+  # };
  
   security.polkit.enable = true;  
 
