@@ -20,7 +20,7 @@
       packages = with pkgs; [
         digikam
         dolphin
-        emacs
+        # emacs
         fd                        # Search engine for emacs
         firefox-wayland
         fzf
@@ -52,6 +52,12 @@
         roboto
         source-code-pro
         xorg.xlsclients
+      ];
+    };
+    programs.emacs = {
+      enable = true;
+      extraPackages = epkgs: [
+        epkgs.magit
       ];
     };
     services.emacs = {
