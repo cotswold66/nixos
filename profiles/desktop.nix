@@ -2,6 +2,9 @@
 
 {
   home-manager.users.john = { config, pkgs, ... }: {
+    imports = [
+      ../mixins/chromium.nix
+    ];
     
     fonts.fontconfig.enable = true;
     
@@ -20,7 +23,6 @@
       packages = with pkgs; [
         digikam
         dolphin
-        # emacs
         fd                        # Search engine for emacs
         firefox-wayland
         fzf

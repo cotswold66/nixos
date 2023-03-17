@@ -23,8 +23,6 @@
               ./hosts/pluto.nix
               ./users/johnlord.nix
               ./profiles/sway.nix
-              ./profiles/desktop.nix
-              ./profiles/common.nix
               nixos-hardware.nixosModules.dell-xps-13-9300
               home-manager.nixosModules.home-manager
               {

@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [
+    ./desktop.nix
+    ./common.nix
+  ];
   
   xdg = {
     portal = {
@@ -20,7 +24,6 @@
     imports = [
       ../mixins/sway.nix
       ../mixins/foot.nix
-      ../mixins/chromium.nix
       ../mixins/waybar.nix
     ];
     home = {
@@ -55,7 +58,6 @@
         swaylock
         wl-clipboard
         wofi
-        xorg.xlsclients
       ];
     };
     programs.bash = {
