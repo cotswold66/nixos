@@ -20,7 +20,7 @@
             inherit system;
             specialArgs = { inherit inputs; };
             modules = [
-              ./hosts/pluto/configuration.nix
+              ./hosts/pluto.nix
               ./users/johnlord.nix
               ./profiles/sway.nix
               ./profiles/desktop.nix
