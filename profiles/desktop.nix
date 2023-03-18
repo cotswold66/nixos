@@ -58,8 +58,11 @@
     };
     programs.emacs = {
       enable = true;
-      extraPackages = epkgs: [
-        epkgs.magit
+      extraPackages = epkgs: with epkgs; [
+        magit
+	      nix-mode
+	      notmuch
+        yaml-mode
       ];
     };
     services.emacs = {

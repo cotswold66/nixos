@@ -25,10 +25,10 @@
         pull.rebase = "false";
       };
     };
-    programs.emacs = {
-      enable = true;
-      package = pkgs.emacs-nox;
-    };
+    # programs.emacs = {
+    #   enable = true;
+    #   package = pkgs.emacs-nox;
+    # };
     programs.vim = {
       enable = true;
       settings = {
