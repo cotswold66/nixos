@@ -31,7 +31,10 @@
         
       };
       file = {
-        ".config/electron-flags.conf".source = ../files/electron-flags.conf;
+        ".config/electron-flags.conf".text = ''
+          --enable-features=WaylandWindowDecorations
+          --ozone-platform-hint=auto
+        '';
         ".config/sway/homescreen.sh".source = ../files/sway/homescreen.sh;
         ".mbsyncrc".source = ../files/mbsyncrc;
         ".config/tmux/tmux.conf".source = ../files/tmux.conf;
