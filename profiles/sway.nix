@@ -36,7 +36,7 @@
           --ozone-platform-hint=auto
         '';
         ".config/sway/homescreen.sh".source = ../files/sway/homescreen.sh;
-        ".mbsyncrc".source = ../files/mbsyncrc;
+        # ".mbsyncrc".source = ../files/mbsyncrc;
         ".config/tmux/tmux.conf".source = ../files/tmux.conf;
       };
       pointerCursor = {
