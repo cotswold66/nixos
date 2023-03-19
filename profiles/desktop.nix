@@ -23,10 +23,11 @@
       packages = with pkgs; [
         digikam
         dolphin
-        fd                        # Search engine for emacs
+        fd                      # Search engine for emacs
         firefox-wayland
         fzf
-        ghostscript               # Needed for emacs doc-view
+        gcc                     # Needed for emacs compiling
+        ghostscript             # Needed for emacs doc-view
         gnome.dconf-editor
         gnucash
         gramps
