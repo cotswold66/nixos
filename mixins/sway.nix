@@ -8,7 +8,7 @@
     extraConfig = ''
       # exec dex --autostart -s ~/.config/autostart/
 
-      # output * bg $HOME/.local/share/backgrounds/p51XiSX-linux-background.jpg fill
+      output * bg $HOME/.config/sway/storm.png fill
 
       bindswitch --reload --locked lid:on output $laptop disable
       bindswitch --reload --locked lid:off output $laptop enable
