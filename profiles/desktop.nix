@@ -20,6 +20,12 @@
       sessionVariables = {
         EDITOR = "${pkgs.emacs}/bin/emacsclient -c";
       };
+      file = {
+        ".local/bin" = {
+          source = ../files/bin;
+          recursive = true;
+        };
+      };
       packages = with pkgs; [
         digikam
         dolphin
