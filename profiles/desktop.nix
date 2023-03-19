@@ -8,6 +8,7 @@
   home-manager.users.john = { config, pkgs, ... }: {
     imports = [
       ../mixins/chromium.nix
+      ../mixins/nextcloud-client.nix
     ];
     
     fonts.fontconfig.enable = true;
@@ -52,6 +53,7 @@
         libreoffice-fresh
         mosh
         mu
+        nextcloud-client
         networkmanagerapplet
         networkmanager-openvpn
         noto-fonts
