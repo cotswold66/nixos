@@ -63,6 +63,21 @@
         wofi
       ];
     };
+    gtk = {
+      enable = true;
+      font = {
+        name = "Roboto";
+        size = 11;
+      };
+      theme = {
+        name = "Adwaita-dark";
+        package = pkgs.gnome.gnome-themes-extra;
+      };
+      iconTheme = {
+        name = "Adwaita";
+        package = pkgs.gnome.adwaita-icon-theme;
+      };
+    };
     programs.bash = {
       profileExtra = ''
       if [ -z "''${DISPLAY}" ] && [ "''${XDG_VTNR}" -eq 1 ]; then
