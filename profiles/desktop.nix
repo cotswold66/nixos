@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [
+    ../mixins/syncthing.nix  
+  ] ;
+  
   home-manager.users.john = { config, pkgs, ... }: {
     imports = [
       ../mixins/chromium.nix
