@@ -27,6 +27,7 @@
         };
       };
       packages = with pkgs; [
+        adwaita-qt
         digikam
         dolphin
         fd                      # Search engine for emacs
