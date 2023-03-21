@@ -68,6 +68,7 @@
         roboto
         source-code-pro
         xorg.xlsclients
+        zoom-us
       ];
     };
     programs.emacs = {
