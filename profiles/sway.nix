@@ -30,15 +30,6 @@
       sessionVariables = {
         
       };
-      file = {
-        ".config/electron-flags.conf".text = ''
-          --enable-features=WaylandWindowDecorations
-          --ozone-platform-hint=auto
-        '';
-        ".config/sway/homescreen.sh".source = ../files/sway/homescreen.sh;
-        # ".mbsyncrc".source = ../files/mbsyncrc;
-        ".config/tmux/tmux.conf".source = ../files/tmux.conf;
-      };
       pointerCursor = {
         gtk.enable = true;
         package = pkgs.bibata-cursors;
@@ -62,6 +53,17 @@
         wl-clipboard
         wofi
       ];
+    };
+    xdg.configFile = {
+      "electron-flags.conf".text = ''
+          --enable-features=WaylandWindowDecorations
+          --ozone-platform-hint=auto
+        '';
+      "tmux/tmux.conf".source = ../files/tmux.conf;
+      "sway" = {
+        source = ../files/sway;
+        recursive = true;
+      };
     };
     gtk = {
       enable = true;
