@@ -24,6 +24,7 @@ in
 
     imports =
       [ 
+        ./alacritty.nix
         ./dconf.nix
         # ./r.nix
         # ./tex.nix
@@ -38,7 +39,6 @@ in
       packages = with pkgs; [
         # bibata-cursors
         adwaita-qt
-        alacritty
         brave
         brightnessctl
         clipman
@@ -137,7 +137,7 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
       };
       sessionVariables = {
         LESS = "-R";
-        XDG_SCREENSHOTS_DIR = ../../Screenshots;
+        XDG_SCREENSHOTS_DIR = "$HOME/Screenshots";
         QT_QPA_PLATFORM = "wayland";
         QT_QPA_PLATFORMTHEME = "qt5ct";
         VDPAU_DRIVER = "va_gl";
@@ -180,7 +180,6 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
     xdg.configFile = {
       "picmirc".source = config.lib.file.mkOutOfStoreSymlink ./files/picmirc;
       "kshisenrc".source = config.lib.file.mkOutOfStoreSymlink ./files/kshisenrc;
-      "alacritty/alacritty.yml".source = ./files/alacritty.yml;
       "chrome-flags.conf".source = ./files/chrome-flags.conf;
       "chromium-flags.conf".source = ./files/chromium-flags.conf;
       "electron-flags.conf".source = ./files/electron-flags.conf;
