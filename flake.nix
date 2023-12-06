@@ -20,28 +20,10 @@
             inherit system;
             specialArgs = { inherit inputs; };
             modules = [
-              ./hosts/pluto.nix
-              ./users/johnlord.nix
+              ./pluto.nix
+              ./johnlord.nix
               # ./profiles/sway.nix
               # ./profiles/email.nix
-              nixos-hardware.nixosModules.dell-xps-13-9300
-              home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  extraSpecialArgs = { inherit inputs; };
-                };
-              }
-            ];
-          };
-          mars = nixpkgs.lib.nixosSystem {
-            inherit system;
-            specialArgs = { inherit inputs; };
-            modules = [
-              ./hosts/pluto.nix
-              ./users/johnlord.nix
-              ./profiles/common.nix
               nixos-hardware.nixosModules.dell-xps-13-9300
               home-manager.nixosModules.home-manager
               {
