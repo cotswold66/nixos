@@ -95,14 +95,8 @@
 
   programs.dconf.enable = true;
   
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ "john" ];
-  };
-  
   services.fwupd.enable = true;
   
-
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -142,7 +136,6 @@
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.video.hidpi.enable = true;
   hardware.opengl = {
     enable = true;
     driSupport = true;
