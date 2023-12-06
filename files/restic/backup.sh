@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Setting this, so the repo does not need to be given on the commandline:
 if [ $1 == 'saturn' ]
@@ -27,7 +27,7 @@ info "Starting backup"
 restic backup                                          \
     --verbose                                          \
     --exclude-caches                                   \
-    --exclude-file=$HOME/bin/excludes.txt \
+    --exclude-file=$HOME/.local/bin/excludes.txt \
     $HOME/ 
 
 backup_exit=$?

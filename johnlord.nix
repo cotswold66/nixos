@@ -96,7 +96,7 @@ in
       stateVersion = "23.11"; # Please read the comment before changing.
       file = {
         ".local/bin/" = {
-          source = ./restic;
+          source = ./files/restic;
           recursive = true;
         };
 
@@ -178,12 +178,12 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
     };
 
     xdg.configFile = {
-      "picmirc".source = config.lib.file.mkOutOfStoreSymlink ./picmirc;
-      "kshisenrc".source = config.lib.file.mkOutOfStoreSymlink ./kshisenrc;
-      "alacritty/alacritty.yml".source = ./alacritty.yml;
-      "chrome-flags.conf".source = ./chrome-flags.conf;
-      "chromium-flags.conf".source = ./chromium-flags.conf;
-      "electron-flags.conf".source = ./electron-flags.conf;
+      "picmirc".source = config.lib.file.mkOutOfStoreSymlink ./files/picmirc;
+      "kshisenrc".source = config.lib.file.mkOutOfStoreSymlink ./files/kshisenrc;
+      "alacritty/alacritty.yml".source = ./files/alacritty.yml;
+      "chrome-flags.conf".source = ./files/chrome-flags.conf;
+      "chromium-flags.conf".source = ./files/chromium-flags.conf;
+      "electron-flags.conf".source = ./files/electron-flags.conf;
     };
   };
 }
