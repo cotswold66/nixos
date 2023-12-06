@@ -39,6 +39,7 @@ in
         # bibata-cursors
         adwaita-qt
         alacritty
+        brave
         brightnessctl
         clipman
         dconf2nix
@@ -47,22 +48,33 @@ in
         firefox-wayland
         font-awesome
         ghostscript
+        gimp
         gnucash
         gnome.dconf-editor
+        gnome.gnome-mahjongg
+        gnome.gnome-mines
+        gnome-extension-manager
         gnumake
         gramps
         hack-font
         # inconsolata
         isync
         kshisen
+        libreoffice
         libertinus
         mako
+        microsoft-edge
+        mosh
+        mu
         networkmanagerapplet
         noto-fonts
         pcloud
+        pdfarranger
         picmi
+        # powerline-fonts
         qt5ct
         restic
+        ripgrep
         roboto
         rsync
         source-code-pro
@@ -72,11 +84,14 @@ in
         swaybg
         swayidle
         swaylock
+        telegram-desktop
         tmux
         waybar
         wl-clipboard
         wofi
         xorg.xlsclients
+        zoom-us
+        zotero
       ];
       stateVersion = "23.11"; # Please read the comment before changing.
       file = {
