@@ -17,7 +17,7 @@
     initrd = {
       availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       kernelModules = [ ];
-      luks.devices."root".device = "/dev/disk/by-uuid/c7f90ee9-be7a-4c12-89f1-d0c3f093c0b0";
+      luks.devices."luks-62c5b522-ffbc-4a23-a5aa-d29eb22d7404".device = "/dev/disk/by-uuid/62c5b522-ffbc-4a23-a5aa-d29eb22d7404";
     };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
@@ -46,6 +46,13 @@
     };
   };
   
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
   console.useXkbConfig = true;
 
   services.xserver.layout = "dk";
@@ -95,38 +102,43 @@
   
   services.fwupd.enable = true;
   
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-  system.stateVersion = "22.11"; # Did you read the comment?
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "john" ];
+  };
+
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
+  
+  system.stateVersion = "23.11"; # Did you read the comment?
+  # imports =
+  #   [ (modulesPath + "/installer/scan/not-detected.nix")
+  #   ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6e9a0dc3-f1a1-4e33-9cf9-06329b7c6941";
-      fsType = "btrfs";
-      options = [ "subvol=@nixos" ];
+    { device = "/dev/disk/by-uuid/78583592-c5f9-4346-accc-a1520b027192";
+      fsType = "ext4";
     };
 
-#  fileSystems."/home" =
-#    { device = "/dev/disk/by-uuid/6e9a0dc3-f1a1-4e33-9cf9-06329b7c6941";
-#      fsType = "btrfs";
-#      options = [ "subvol=@home-nixos" ];
-#    };
-#
-#  fileSystems."/var/lib/libvirt" =
-#    { device = "/dev/disk/by-uuid/6e9a0dc3-f1a1-4e33-9cf9-06329b7c6941";
-#      fsType = "btrfs";
-#      options = [ "subvol=@libvirt" ];
-#    };
-
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/BD99-62EC";
+    { device = "/dev/disk/by-uuid/0732-2B8B";
       fsType = "vfat";
     };
 
   swapDevices = [ ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
