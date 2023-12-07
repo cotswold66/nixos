@@ -15,7 +15,7 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+      availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
       kernelModules = [ ];
       luks.devices."luks-62c5b522-ffbc-4a23-a5aa-d29eb22d7404".device = "/dev/disk/by-uuid/62c5b522-ffbc-4a23-a5aa-d29eb22d7404";
     };
@@ -116,9 +116,9 @@
 
   
   system.stateVersion = "23.11"; # Did you read the comment?
-  # imports =
-  #   [ (modulesPath + "/installer/scan/not-detected.nix")
-  #   ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/78583592-c5f9-4346-accc-a1520b027192";
@@ -134,11 +134,10 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
       intel-media-driver
