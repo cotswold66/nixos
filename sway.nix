@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./desktop.nix
-    ./common.nix
+    # ./desktop.nix
+    # ./common.nix
   ];
   
   xdg = {
@@ -22,9 +22,9 @@
 
   home-manager.users.john = { config, pkgs, ... }: {
     imports = [
-      ../mixins/sway.nix
-      ../mixins/foot.nix
-      ../mixins/waybar.nix
+      ./configs/sway.nix
+      ./configs/foot.nix
+      ./configs/waybar.nix
     ];
     home = {
       sessionVariables = {
@@ -32,18 +32,21 @@
       };
       pointerCursor = {
         gtk.enable = true;
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Original-Classic";
-        size = 22;
+        package = pkgs.gnome.adwaita-icon-theme;
+        name = "Adwaita";
+        size = 24;
+        x11 = {
+          enable = true;
+          defaultCursor = "Adwaita";
+        };
       };
       packages = with pkgs; [
-        bibata-cursors
+        # bibata-cursors
         brightnessctl
         clipman
         font-awesome              # Fonts used in waybar
         mako
-        pinentry-curses
-        restic
+        # pinentry-curses
         roboto
         source-code-pro
         sway-contrib.grimshot

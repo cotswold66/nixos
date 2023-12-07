@@ -3,12 +3,10 @@
 {
   programs.alacritty = {
     enable = true;
-    settings = {
-      window = {
-        dimensions = {
-          columns = 90;
-          lines = 40;
-        };
+    settings.window = {
+      dimensions = {
+        columns = 90;
+        lines = 40;
       };
       font = {
         normal = {

@@ -21,7 +21,7 @@
             modules = [
               ./pluto.nix
               ./johnlord.nix
-              # ./profiles/sway.nix
+              ./sway.nix
               # ./profiles/email.nix
               home-manager.nixosModules.home-manager
               {

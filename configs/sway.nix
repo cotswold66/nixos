@@ -7,6 +7,7 @@
     # extraConfig = builtins.readFile ./sway/config;
     extraConfig = ''
       # exec dex --autostart -s ~/.config/autostart/
+      # default_border pixel 5
 
       output * bg $HOME/.config/sway/storm.png fill
 

@@ -37,11 +37,8 @@ in
         "$HOME/.local/bin"
       ];
       packages = with pkgs; [
-        # bibata-cursors
         adwaita-qt
         brave
-        brightnessctl
-        clipman
         dconf2nix
         digikam
         fd
@@ -57,12 +54,10 @@ in
         gnumake
         gramps
         hack-font
-        # inconsolata
         isync
         kshisen
         libreoffice
         libertinus
-        mako
         microsoft-edge
         mosh
         mu
@@ -71,7 +66,6 @@ in
         pcloud
         pdfarranger
         picmi
-        # powerline-fonts
         qt5ct
         restic
         ripgrep
@@ -79,16 +73,9 @@ in
         rsync
         source-code-pro
         stow
-        sway
-        sway-contrib.grimshot
-        swaybg
-        swayidle
-        swaylock
         telegram-desktop
         tmux
-        waybar
         wl-clipboard
-        wofi
         xorg.xlsclients
         zoom-us
         zotero
