@@ -5,7 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = { self, home-manager, nixpkgs, nixos-hardware, ... }@inputs:
@@ -24,7 +23,6 @@
               ./johnlord.nix
               # ./profiles/sway.nix
               # ./profiles/email.nix
-              nixos-hardware.nixosModules.dell-xps-13-9300
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
