@@ -107,6 +107,9 @@
     polkitPolicyOwners = [ "john" ];
   };
 
+  programs.sway.enable = true;
+  xdg.portal.wlr.enable = true;
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
