@@ -21,6 +21,7 @@
             modules = [
               ./pluto.nix
               ./johnlord.nix
+              ./syncthing.nix
               # ./sway.nix
               # ./email.nix
               home-manager.nixosModules.home-manager
