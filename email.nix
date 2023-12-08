@@ -17,6 +17,16 @@
         mbsync = {
           enable = true;
           create = "maildir";
+          expunge = "maildir";
+          flatten = ".";
+          patterns = [ "[Gmail]/All Mail" ];
+          extraConfig = {
+            channel = {
+              Sync = [ "Pull" "New" "ReNew" "Delete" "Flags" ];
+              SyncState = "*";
+              CopyArrivalDate = "yes";
+            };
+          };
         };
         msmtp.enable = true;
         notmuch.enable = true;
