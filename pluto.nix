@@ -115,6 +115,10 @@
     pulse.enable = true;
   };
 
+  services.tlp.enable = true;
+  services.thermald.enable = true;
+  services.power-profiles-daemon.enable = false;
+
   security.polkit.enable = true;  
 
   # Allow unfree packages
@@ -175,7 +179,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.opengl = {
     enable = true;
