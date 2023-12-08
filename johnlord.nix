@@ -26,6 +26,7 @@ in
       [ 
         ./configs/alacritty.nix
         ./configs/dconf.nix
+        ./configs/vim.nix
         # ./configs/r.nix
         # ./configs/tex.nix
       ];
