@@ -62,9 +62,9 @@
           --enable-features=WaylandWindowDecorations
           --ozone-platform-hint=auto
         '';
-      "tmux/tmux.conf".source = ../files/tmux.conf;
+      "tmux/tmux.conf".source = ./files/tmux.conf;
       "sway" = {
-        source = ../files/sway;
+        source = ./files/sway;
         recursive = true;
       };
     };

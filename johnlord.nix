@@ -24,10 +24,10 @@ in
 
     imports =
       [ 
-        ./alacritty.nix
-        ./dconf.nix
-        # ./r.nix
-        # ./tex.nix
+        ./configs/alacritty.nix
+        ./configs/dconf.nix
+        # ./configs/r.nix
+        # ./configs/tex.nix
       ];
 
     home = {
