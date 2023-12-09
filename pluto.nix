@@ -44,7 +44,10 @@
     initrd = {
       availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
       kernelModules = [ ];
-      luks.devices."luks-62c5b522-ffbc-4a23-a5aa-d29eb22d7404".device = "/dev/disk/by-uuid/62c5b522-ffbc-4a23-a5aa-d29eb22d7404";
+      luks.devices."luks-62c5b522-ffbc-4a23-a5aa-d29eb22d7404" = {
+        device = "/dev/disk/by-uuid/62c5b522-ffbc-4a23-a5aa-d29eb22d7404";
+        allowDiscards = true;
+      };
     };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
@@ -92,7 +95,6 @@
     epiphany # web browser
     geary # email reader
   ]);
-
 
   console.useXkbConfig = true;
 
@@ -176,6 +178,8 @@
     };
 
   swapDevices = [ ];
+
+  services.fstrim.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
