@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, modulesPath, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   nixpkgs.overlays = [
@@ -26,7 +26,17 @@
       } )
   ];
 
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
+  users.users.john = {
+    isNormalUser = true;
+    description = "John Lord";
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    packages = with pkgs; [
+    ];
+  };
 
   # Use the grub EFI boot loader due to HiDPI screen
   boot = {
@@ -42,21 +52,19 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
-      kernelModules = [ ];
+      # availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+      # kernelModules = [ ];
       luks.devices."luks-62c5b522-ffbc-4a23-a5aa-d29eb22d7404" = {
-        device = "/dev/disk/by-uuid/62c5b522-ffbc-4a23-a5aa-d29eb22d7404";
         allowDiscards = true;
       };
     };
-    kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
+    # kernelModules = [ "kvm-intel" ];
+    # extraModulePackages = [ ];
   };
   
   networking = {
     hostName = "pluto";
     networkmanager.enable = true;
-    useDHCP = lib.mkDefault true;
   };
 
   time.timeZone = "America/Chicago";
@@ -160,30 +168,11 @@
       experimental-features = nix-command flakes
     '';
   };
-
   
   system.stateVersion = "23.11"; # Did you read the comment?
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/78583592-c5f9-4346-accc-a1520b027192";
-      fsType = "ext4";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0732-2B8B";
-      fsType = "vfat";
-    };
-
-  swapDevices = [ ];
 
   services.fstrim.enable = true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [

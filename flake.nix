@@ -7,33 +7,27 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, home-manager, nixpkgs, nixos-hardware, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-      { 
-        nixosModules = import ./modules { lib = nixpkgs.lib; }; 
-        nixosConfigurations = {
-          pluto = nixpkgs.lib.nixosSystem {
-            inherit system;
-            specialArgs = { inherit inputs; };
-            modules = [
-              ./pluto.nix
-              ./johnlord.nix
-              # ./syncthing.nix
-              # ./sway.nix
-              # ./email.nix
-              home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  extraSpecialArgs = { inherit inputs; };
-                };
-              }
-            ];
-          };
-        };
+  outputs = inputs @ { self, home-manager, nixpkgs,  ... }: {
+    nixosConfigurations = {
+      pluto = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        # specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/pluto
+          # ./syncthing.nix
+          # ./sway.nix
+          # ./email.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = inputs;
+              users.john = import ./johnlord.nix;
+            };
+          }
+        ];
       };
+    };
+  };
 }
