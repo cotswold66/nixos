@@ -23,7 +23,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = inputs;
-              users.john = import ./johnlord.nix;
+              users.john = import ./home;
             };
           }
         ];

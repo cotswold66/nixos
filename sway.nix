@@ -1,10 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    # ./desktop.nix
-    # ./common.nix
-  ];
   
   xdg = {
     portal = {
