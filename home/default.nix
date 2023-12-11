@@ -12,7 +12,7 @@
     [ 
       ./alacritty
       ./dconf
-      ./vim
+      ./editors
       ./sway
       # ./configs/r.nix
       # ./configs/tex.nix
@@ -30,10 +30,8 @@
       brave
       dconf2nix
       digikam
-      fd
       firefox-wayland
       font-awesome
-      ghostscript
       gimp
       gnucash
       gnome.dconf-editor
@@ -57,10 +55,8 @@
       picmi
       qt5ct
       restic
-      ripgrep
       roboto
       rsync
-      source-code-pro
       stow
       telegram-desktop
       tmux
@@ -139,12 +135,6 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
     settings = { PASSWORD_STORE_DIR = "$HOME/src/password-store"; };
   };
 
-  services.emacs = {
-    enable = true;
-    client.enable = true;
-    defaultEditor= true;
-    package = pkgs.emacs29-pgtk;
-  };
 
   services.gpg-agent = {
     enable = true;
