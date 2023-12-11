@@ -16,7 +16,7 @@
       ./sway
       # ./configs/r.nix
       # ./configs/tex.nix
-      ./chromium
+      ./browsers
     ];
 
   home = {

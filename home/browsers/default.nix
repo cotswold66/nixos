@@ -1,0 +1,5 @@
+{
+  import = [
+    ./chromium.nix
+  ];
+}

@@ -3,8 +3,7 @@
   programs.chromium = {
     enable = true;
     commandLineArgs = [
-      "--enable-features=UseOzonePlatform"
-      "--ozone-platform=wayland"
+      "--disable-features=WaylandFractionalScaleV1"
     ];
     extensions = [
       { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; }
