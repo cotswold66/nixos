@@ -39,13 +39,11 @@
       gnumake
       gramps
       hack-font
-      isync
       kshisen
       libreoffice
       libertinus
       microsoft-edge
       mosh
-      mu
       networkmanagerapplet
       networkmanager-openvpn
       noto-fonts
