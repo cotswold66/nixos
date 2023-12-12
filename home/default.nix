@@ -106,7 +106,6 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
     };
     sessionVariables = {
       LESS = "-R";
-      XDG_SCREENSHOTS_DIR = "$HOME/Screenshots";
       QT_QPA_PLATFORM = "wayland";
       QT_QPA_PLATFORMTHEME = "qt5ct";
       VDPAU_DRIVER = "va_gl";
@@ -147,5 +146,14 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
     # "chromium-flags.conf".source = ../files/chromium-flags.conf;
     "electron-flags.conf".source = ../files/electron-flags.conf;
   };
+
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    extraConfig = {
+      XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Screenshots";
+    };
+  };
+
 
 }
