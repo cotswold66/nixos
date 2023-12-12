@@ -78,24 +78,24 @@
     enable = true;
     historyControl = [ "erasedups" "ignoredups" ];
     initExtra = ''
-bind '"\e[A": history-search-backward'
-bind '"\eOA": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind '"\eOB": history-search-forward'
+      bind '"\e[A": history-search-backward'
+      bind '"\eOA": history-search-backward'
+      bind '"\e[B": history-search-forward'
+      bind '"\eOB": history-search-forward'
+            
+      # Base16 Shell
+      BASE16_SHELL="$HOME/src/base16-shell/"
+      [ -n "$PS1" ] && \
+          [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+              source "$BASE16_SHELL/profile_helper.sh"
+      base16_tomorrow-night
       
-# Base16 Shell
-BASE16_SHELL="$HOME/src/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        source "$BASE16_SHELL/profile_helper.sh"
-base16_tomorrow-night
-
-PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
-
-# Eat shell integration
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
-  source "$EAT_SHELL_INTEGRATION_DIR/bash"
-'';
+      PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+      
+      # Eat shell integration
+      [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+        source "$EAT_SHELL_INTEGRATION_DIR/bash"
+      '';
     shellAliases = {
       diff = "diff --color=auto";
       grep = "grep --color=auto";
