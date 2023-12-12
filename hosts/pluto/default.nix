@@ -92,18 +92,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
-    power-profiles-daemon
-  ]) ++ (with pkgs.gnome; [
-    gnome-calendar
-    gnome-contacts
-    gnome-music
-    gedit # text editor
-    epiphany # web browser
-    geary # email reader
-  ]);
 
   console.useXkbConfig = true;
 
@@ -140,6 +128,19 @@
     virt-manager
     wget
   ];
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    power-profiles-daemon
+  ]) ++ (with pkgs.gnome; [
+    gnome-calendar
+    gnome-contacts
+    gnome-music
+    gedit # text editor
+    epiphany # web browser
+    geary # email reader
+  ]);
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   virtualisation.libvirtd = {
     enable = true;
