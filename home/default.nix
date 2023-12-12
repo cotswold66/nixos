@@ -108,6 +108,7 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
       LESS = "-R";
       QT_QPA_PLATFORM = "wayland";
       QT_QPA_PLATFORMTHEME = "qt5ct";
+      SSH_AUTH_SOCK=/run/user/1000/keyring/ssh; # Needed for magit
       VDPAU_DRIVER = "va_gl";
     };
   };
