@@ -47,6 +47,7 @@
       mosh
       mu
       networkmanagerapplet
+      networkmanager-openvpn
       noto-fonts
       pcloud
       pdfarranger
