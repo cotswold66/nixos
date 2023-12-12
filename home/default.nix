@@ -144,7 +144,7 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
     "picmirc".source = config.lib.file.mkOutOfStoreSymlink ../files/picmirc;
     "kshisenrc".source = config.lib.file.mkOutOfStoreSymlink ../files/kshisenrc;
     "chrome-flags.conf".source = ../files/chrome-flags.conf;
-    "chromium-flags.conf".source = ../files/chromium-flags.conf;
+    # "chromium-flags.conf".source = ../files/chromium-flags.conf;
     "electron-flags.conf".source = ../files/electron-flags.conf;
   };
 
