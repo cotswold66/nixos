@@ -1,4 +1,4 @@
-{ config, pkgs,  ...}:
+{pkgs, ...}:
 
 let 
   my-emacs = ((pkgs.emacsPackagesFor pkgs.emacs29-pgtk).emacsWithPackages (
