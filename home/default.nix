@@ -10,13 +10,10 @@
 
   imports =
     [ 
-      ./alacritty
       ./dconf
       ./editors
       ./email
       ./sway
-      # ./configs/r.nix
-      # ./configs/tex.nix
       ./browsers
     ];
 
