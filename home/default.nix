@@ -155,6 +155,7 @@
       XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Screenshots";
     };
   };
-
+  
+  programs.home-manager.enable = true;
 
 }
