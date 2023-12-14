@@ -9,24 +9,18 @@
 
   outputs = inputs @ { self, home-manager, nixpkgs,  ... }: {
     nixosConfigurations = {
-      pluto = nixpkgs.lib.nixosSystem {
+      "pluto" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        # specialArgs = { inherit inputs; };
         modules = [
           ./hosts/pluto
-          # ./syncthing.nix
-          # ./sway.nix
-          # ./email.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = inputs;
-              users.john = import ./home;
-            };
-          }
         ];
+      };
+    };
+    homeConfigurations = {
+      "john@pluto" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = inputs;
+        modules = [ ./home ];
       };
     };
   };
