@@ -65,7 +65,7 @@
     stateVersion = "23.11"; # Please read the comment before changing.
     file = {
       ".local/bin/" = {
-        source = ../files/restic;
+        source = ./files/restic;
         recursive = true;
       };
 
@@ -141,11 +141,11 @@
   };
 
   xdg.configFile = {
-    "picmirc".source = config.lib.file.mkOutOfStoreSymlink ../files/picmirc;
-    "kshisenrc".source = config.lib.file.mkOutOfStoreSymlink ../files/kshisenrc;
-    "chrome-flags.conf".source = ../files/chrome-flags.conf;
-    # "chromium-flags.conf".source = ../files/chromium-flags.conf;
-    "electron-flags.conf".source = ../files/electron-flags.conf;
+    "picmirc".source = config.lib.file.mkOutOfStoreSymlink ./files/picmirc;
+    "kshisenrc".source = config.lib.file.mkOutOfStoreSymlink ./files/kshisenrc;
+    "chrome-flags.conf".source = ./files/chrome-flags.conf;
+    # "chromium-flags.conf".source = ./files/chromium-flags.conf;
+    "electron-flags.conf".source = ./files/electron-flags.conf;
   };
 
   xdg.userDirs = {

@@ -20,7 +20,7 @@
       "john@pluto" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = inputs;
-        modules = [ ./home ];
+        modules = [ ./home/john/pluto.nix ];
       };
     };
   };
