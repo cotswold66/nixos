@@ -2,10 +2,15 @@
 
 let 
   my-emacs = ((pkgs.emacsPackagesFor pkgs.emacs29-pgtk).emacsWithPackages (
-    epkgs: [ epkgs.notmuch ])
+    epkgs: [ epkgs.notmuch epkgs.eat ])
   );
 in
 {  
+  programs.emacs = {
+    enable = true;
+    package = my-emacs;
+  };
+
   services.emacs = {
     enable = true;
     client.enable = true;
