@@ -19,7 +19,7 @@
     homeConfigurations = {
       "john@pluto" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = inputs;
+        extraSpecialArgs = { inherit inputs; };
         modules = [ ./home/john/pluto.nix ];
       };
     };
