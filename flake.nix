@@ -15,6 +15,12 @@
           ./hosts/pluto
         ];
       };
+      "saturn" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/saturn
+        ];
+      };
     };
     homeConfigurations = {
       "john@pluto" = home-manager.lib.homeManagerConfiguration {
