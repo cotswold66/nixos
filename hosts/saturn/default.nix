@@ -105,6 +105,11 @@
     enableSSHSupport = true;
   };
 
+  services.plex = {
+    enable = true;
+    openFirewall = true;
+  };
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
