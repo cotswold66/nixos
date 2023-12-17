@@ -13,6 +13,14 @@
     packages = with pkgs; [
     ];
   };
+  users.users = {
+    admin = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      password = "admin";
+    };
+  };
+
 
   # Use the grub EFI boot loader due to HiDPI screen
   boot = {
