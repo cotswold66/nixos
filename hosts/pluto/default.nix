@@ -28,7 +28,6 @@
 
   imports = [
     ./hardware-configuration.nix
-    # ../common/sway
   ];
 
   users.users.john = {
