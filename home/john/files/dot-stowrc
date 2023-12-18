@@ -1,0 +1,3 @@
+--target=~/
+--dir=~/src/nixos/home/john/state/
+--dotfiles

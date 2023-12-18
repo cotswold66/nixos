@@ -68,7 +68,11 @@
         source = ./files/restic;
         recursive = true;
       };
-
+      ".stowrc".source = ./files/dot-stowrc;
+      ".local/share/gnome-mines/scores/" = {
+        source = config.lib.file.mkOutOfStoreSymlink ./files/gnome-mines_scores;
+        recursive = true;
+      };
     };
   };
 
