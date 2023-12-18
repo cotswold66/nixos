@@ -54,7 +54,6 @@
       restic
       roboto
       rsync
-      stow
       telegram-desktop
       tmux
       wl-clipboard
@@ -66,11 +65,6 @@
     file = {
       ".local/bin/" = {
         source = ./files/restic;
-        recursive = true;
-      };
-      ".stowrc".source = ./files/dot-stowrc;
-      ".local/share/gnome-mines/scores/" = {
-        source = config.lib.file.mkOutOfStoreSymlink ./files/gnome-mines_scores;
         recursive = true;
       };
     };
@@ -145,8 +139,6 @@
   };
 
   xdg.configFile = {
-    "picmirc".source = config.lib.file.mkOutOfStoreSymlink ./files/picmirc;
-    "kshisenrc".source = config.lib.file.mkOutOfStoreSymlink ./files/kshisenrc;
     "chrome-flags.conf".source = ./files/chrome-flags.conf;
     # "chromium-flags.conf".source = ./files/chromium-flags.conf;
     "electron-flags.conf".source = ./files/electron-flags.conf;
