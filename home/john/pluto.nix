@@ -13,7 +13,7 @@
       ./dconf
       ./editors
       ./email
-      ./sway
+      # ./sway
       ./browsers
     ];
 
