@@ -12,10 +12,14 @@ $HOME/*
 !$HOME/Templates
 !$HOME/Videos
 !$HOME/Zotero
-!$HOME/.emacs.d
 !$HOME/.gnupg
 !$HOME/.gramps
 !$HOME/.ssh
+
+!$HOME/.emacs.d
+$HOME/.emacs.d/*
+!$HOME/.emacs.d/bookmarks
+!$HOME/.emacs.d/projects
 
 !$HOME/.config
 $HOME/.config/*
