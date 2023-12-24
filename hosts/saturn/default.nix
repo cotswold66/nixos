@@ -9,16 +9,11 @@
   users.users.john = {
     isNormalUser = true;
     description = "John Lord";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "podman" ];
+    password = "john";
+    uid = 1000;
     packages = with pkgs; [
     ];
-  };
-  users.users = {
-    admin = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-      password = "admin";
-    };
   };
 
 
@@ -76,11 +71,39 @@
     wget
   ];
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      swtpm.enable = true;
-      ovmf.enable = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+        ovmf.enable = true;
+      };
+    };
+    docker.enable = false;
+    podman = {
+      enable = true;
+      dockerSocket.enable = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+    oci-containers = {
+      backend = "podman";
+      containers = {
+        "plex" = {
+          extraOptions = [ "--network=host" ];
+          hostname = "plex";
+          image = "plexinc/pms-docker:latest";
+          autoStart = true;
+          environment = {
+            TZ = "America/Chicago";
+            ADVERTISE_IP = "http://localhost:32400";
+          };
+          volumes = [
+            "plex-config:/config"
+            "plex-data:/data"
+            "plex-transcode:/transcode"
+          ];
+        };
+      };
     };
   };
 
@@ -90,6 +113,9 @@
       memorySize = 2048; # Use 2048MiB memory.
       cores = 3;
       graphics = false;
+      forwardPorts = [
+        { from = "host"; host.port = 32400; guest.port = 32400; }
+      ];
     };
   };
 
