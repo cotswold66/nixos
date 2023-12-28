@@ -17,7 +17,7 @@
 
   networking.hostName = "saturn"; # Define your hostname.
   networking.hostId = "deadbeef";
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [ 22 32400 ];
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -58,7 +58,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # virtualisation = {
+  virtualisation = {
   #   libvirtd = {
   #     enable = true;
   #     qemu = {
@@ -66,33 +66,93 @@
   #       ovmf.enable = true;
   #     };
   #   };
-  #   docker.enable = false;
+    docker = {
+      enable = true;
+      storageDriver = "zfs";
+    };
   #   podman = {
   #     enable = true;
   #     dockerSocket.enable = true;
   #     defaultNetwork.settings.dns_enabled = true;
   #   };
-  #   oci-containers = {
-  #     backend = "podman";
-  #     containers = {
-  #       "plex" = {
-  #         extraOptions = [ "--network=host" ];
-  #         hostname = "plex";
-  #         image = "plexinc/pms-docker:latest";
-  #         autoStart = true;
-  #         environment = {
-  #           TZ = "America/Chicago";
-  #           ADVERTISE_IP = "http://localhost:32400";
-  #         };
-  #         volumes = [
-  #           "plex-config:/config"
-  #           "plex-data:/data"
-  #           "plex-transcode:/transcode"
-  #         ];
-  #       };
-  #     };
-  #   };
-  # };
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        "plex" = {
+          extraOptions = [ "--network=host" ];
+          hostname = "plex";
+          image = "plexinc/pms-docker:latest";
+          autoStart = true;
+          environment = {
+            TZ = "America/Chicago";
+            ADVERTISE_IP = "http://192.168.1.2:32400";
+          };
+          volumes = [
+            "plex-config:/config"
+            "media:/data"
+            "plex-transcode:/transcode"
+          ];
+        };
+        "unifi" = {
+          extraOptions = [ "--network=macnet" "--ip=192.168.1.15" ];
+          hostname = "unifi";
+          image = "lscr.io/linuxserver/unifi-controller:latest";
+          autoStart = true;
+          environment = {
+            TZ = "America/Chicago";
+            PUID = "1000";
+            PGID = "1000";
+          };
+          volumes = [
+            "unifi:/config"
+          ];
+        };
+        "pihole" = {
+          extraOptions = [ "--network=macnet" "--ip=192.168.1.6" ];
+          hostname = "pihole";
+          image = "pihole/pihole:latest";
+          autoStart = true;
+          environment = {
+            TZ = "America/Chicago";
+          };
+          volumes = [
+            "pihole-etc:/etc/pihole"
+            "dnsmasq-etc:/etc/dnsmasq.d"
+          ];
+        };
+        "rest-server" = {
+          ports = [ "8000:8000" ];
+          hostname = "rest-server";
+          image = "restic/rest-server:latest";
+          autoStart = true;
+          environment = {
+            DISABLE_AUTHENTICATION = "1";
+          };
+          volumes = [
+            "/backup/restic:/data"
+          ];
+        };
+        "portainer" = {
+          ports = [ "9443:9443" ];
+          hostname = "portainer";
+          image = "portainer/portainer-ce:latest";
+          autoStart = true;
+          volumes = [
+            "portainer:/data"
+            "/var/run/docker.sock:/var/run/docker.sock"
+          ];
+        };
+        "watchtower" = {
+          hostname = "watchtower";
+          image = "containrrr/watchtower";
+          autoStart = true;
+          volumes = [
+            "/var/run/docker.sock:/var/run/docker.sock"
+          ];
+        };
+      };
+    };
+  };
   
 
   # Configure keymap in X11
@@ -113,7 +173,7 @@
   users.users.john = {
     isNormalUser = true;
     description = "John Lord";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
      ];
   };
