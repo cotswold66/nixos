@@ -45,8 +45,8 @@ restic forget                       \
     --keep-hourly   2               \
     --keep-daily    7               \
     --keep-weekly   4               \
-    --keep-monthly  6               \
-    --keep-yearly   2               \
+    --keep-monthly  12              \
+    --keep-yearly   5               \
     --prune                         \
 
 prune_exit=$?
