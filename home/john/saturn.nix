@@ -62,11 +62,12 @@
       # zotero
     ];
     stateVersion = "23.11"; # Please read the comment before changing.
-    # file = {
-    #   ".local/bin/" = {
-    #     source = ./files/restic;
-    #     recursive = true;
-    #   };
+    file = {
+      ".local/bin/" = {
+        source = ./files/restic;
+        recursive = true;
+      };
+    };
   };
 
 
