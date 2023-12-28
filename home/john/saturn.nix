@@ -51,7 +51,6 @@
       # pdfarranger
       # picmi
       # qt5ct
-      # restic
       # roboto
       rsync
       # telegram-desktop

@@ -124,6 +124,7 @@
 
   environment.systemPackages = with pkgs; [
     git
+    restic
     virt-manager
     wget
   ];
@@ -140,6 +141,15 @@
     geary # email reader
   ]);
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  security.wrappers.restic = {
+    source = "${pkgs.restic}/bin/restic";
+    capabilities ="cap_dac_read_search=+ep";
+    owner = "root";
+    group = "users";
+    permissions ="750";
+  };
+
 
   virtualisation.libvirtd = {
     enable = true;

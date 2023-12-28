@@ -181,10 +181,19 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    restic
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
   ];
+
+  security.wrappers.restic = {
+    source = "${pkgs.restic}/bin/restic";
+    capabilities ="cap_dac_read_search=+ep";
+    owner = "root";
+    group = "users";
+    permissions ="750";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
