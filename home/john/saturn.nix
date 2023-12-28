@@ -27,6 +27,7 @@
       # brave
       # dconf2nix
       # digikam
+      emacs-nox
       # firefox-wayland
       # font-awesome
       # gimp
@@ -104,24 +105,24 @@
     userName = "John Lord";
     userEmail = "john@lordsonline.org";
     extraConfig = {
-      # core.editor = "${pkgs.emacs29-pgtk}/bin/emacsclient -c";
+      core.editor = "${pkgs.emacs-nox}/bin/emacsclient -c";
       init.defaultBranch = "main";
       pull.rebase = "false";
     };
   };
 
-  # programs.password-store = {
-  #   enable = true;
-  #   settings = { PASSWORD_STORE_DIR = "$HOME/src/password-store"; };
-  # };
+  programs.password-store = {
+    enable = true;
+    settings = { PASSWORD_STORE_DIR = "$HOME/src/password-store"; };
+  };
 
 
-  # services.gpg-agent = {
-  #   enable = true;
-  #   defaultCacheTtl = 86400;
-  #   maxCacheTtl = 86400;
-  #   # pinentryFlavor = "qt";
-  # };
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 86400;
+    maxCacheTtl = 86400;
+    # pinentryFlavor = "qt";
+  };
 
   # xdg.configFile = {
   #   "chrome-flags.conf".source = ./files/chrome-flags.conf;
