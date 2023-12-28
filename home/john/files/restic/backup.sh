@@ -27,8 +27,8 @@ info "Starting backup"
 restic backup                                          \
     --verbose                                          \
     --exclude-caches                                   \
-    --exclude-file=$HOME/.local/bin/excludes.txt \
-    $HOME/ 
+    --exclude-file=$HOME/.local/bin/excludes.txt       \
+    / 
 
 backup_exit=$?
 
