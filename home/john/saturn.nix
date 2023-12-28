@@ -53,9 +53,9 @@
       # qt5ct
       # restic
       # roboto
-      # rsync
+      rsync
       # telegram-desktop
-      # tmux
+      tmux
       # wl-clipboard
       # xorg.xlsclients
       # zoom-us
