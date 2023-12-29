@@ -73,17 +73,11 @@
   #       ovmf.enable = true;
   #     };
   #   };
-    docker = {
+    podman = {
       enable = true;
-      storageDriver = "zfs";
     };
-  #   podman = {
-  #     enable = true;
-  #     dockerSocket.enable = true;
-  #     defaultNetwork.settings.dns_enabled = true;
-  #   };
     oci-containers = {
-      backend = "docker";
+      backend = "podman";
       containers = {
         "plex" = {
           extraOptions = [ "--network=host" ];
@@ -137,24 +131,6 @@
           };
           volumes = [
             "/backup/restic:/data"
-          ];
-        };
-        "portainer" = {
-          ports = [ "9443:9443" ];
-          hostname = "portainer";
-          image = "portainer/portainer-ce:latest";
-          autoStart = true;
-          volumes = [
-            "portainer:/data"
-            "/var/run/docker.sock:/var/run/docker.sock"
-          ];
-        };
-        "watchtower" = {
-          hostname = "watchtower";
-          image = "containrrr/watchtower";
-          autoStart = true;
-          volumes = [
-            "/var/run/docker.sock:/var/run/docker.sock"
           ];
         };
       };
