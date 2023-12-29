@@ -33,8 +33,8 @@
       fsType = "zfs";
     };
 
-  fileSystems."/var/lib/docker" =
-    { device = "zdata/docker";
+  fileSystems."/var/lib/containers/storage/volumes" =
+    { device = "zdata/volumes";
       fsType = "zfs";
     };
 
