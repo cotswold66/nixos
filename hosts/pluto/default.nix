@@ -13,17 +13,17 @@
     #       ];
     #     });
     #   } )
-    ( final: prev:
-      {
-        libblockdev = prev.libblockdev.overrideAttrs (old: {
-          patches = (old.patches or []) ++ [
-            (prev.fetchpatch {
-              url = "https://github.com/storaged-project/libblockdev/pull/969.patch";
-              hash = "sha256:LHeotKzcRDdT/GhH3JdVjX/7ZMN1ghllYuaxPYsCZMY=";
-            })
-          ];
-        });
-      } )
+    # ( final: prev:
+    #   {
+    #     libblockdev = prev.libblockdev.overrideAttrs (old: {
+    #       patches = (old.patches or []) ++ [
+    #         (prev.fetchpatch {
+    #           url = "https://github.com/storaged-project/libblockdev/pull/969.patch";
+    #           hash = "sha256:LHeotKzcRDdT/GhH3JdVjX/7ZMN1ghllYuaxPYsCZMY=";
+    #         })
+    #       ];
+    #     });
+    #   } )
   ];
 
   imports = [
