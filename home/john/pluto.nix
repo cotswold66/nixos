@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   nixpkgs = {
@@ -81,7 +81,8 @@
       bind '"\eOB": history-search-forward'
             
       # Base16 Shell
-      BASE16_SHELL="$HOME/src/base16-shell/"
+      # BASE16_SHELL="$HOME/src/base16-shell/"
+      BASE16_SHELL="${inputs.base16-shell}"
       [ -n "$PS1" ] && \
           [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
               source "$BASE16_SHELL/profile_helper.sh"

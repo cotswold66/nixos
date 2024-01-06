@@ -5,9 +5,13 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    base16-shell = {
+      url = "github:cotswold66/base16-shell";
+      flake = false;
+    };
   };
 
-  outputs = inputs @ { self, home-manager, nixpkgs,  ... }: {
+  outputs = inputs @ { self, home-manager, nixpkgs, base16-shell, ... }: {
     nixosConfigurations = {
       "pluto" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
