@@ -1,5 +1,6 @@
 { config, pkgs, inputs, ... }:
 
+
 {
   nixpkgs = {
     config = {
@@ -17,7 +18,6 @@
     packages = with pkgs; [
       mosh
       rsync
-      tmux
     ];
     file = {
       ".local/bin/" = {
@@ -65,6 +65,30 @@
   programs.password-store = {
     enable = true;
     settings = { PASSWORD_STORE_DIR = "$HOME/src/password-store"; };
+  };
+
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      # Rename your terminals
+      set -g set-titles on
+      set -g set-titles-string '#(whoami)::#h::#(curl ipecho.net/plain;echo)'
+      
+      # Color terminal
+      set -g allow-passthrough 1
+      
+      # Status bar customization
+      set -g status-bg black
+      set -g status-fg white
+      set -g status-interval 5
+      set -g status-left-length 90
+      set -g status-right-length 60
+      set -g status-justify left
+      set -g status-right '#[fg=Cyan]#S #[fg=white]%a %d %b %R' 
+    '';
+    keyMode = "emacs";
+    mouse = true;
+    newSession = true;
   };
 
   services.gpg-agent = {
