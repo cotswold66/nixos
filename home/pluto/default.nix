@@ -13,14 +13,14 @@
   home = {
     packages = with pkgs; [
       adwaita-qt
-      brave
-      dconf2nix
+      # brave
+      # dconf2nix
       digikam
       firefox
       font-awesome
       gimp
       gnucash
-      gnome.dconf-editor
+      # gnome.dconf-editor
       gnome.gnome-mahjongg
       gnome.gnome-mines
       gnome-extension-manager
@@ -31,10 +31,10 @@
       libreoffice
       libertinus
       microsoft-edge
-      networkmanagerapplet
+      # networkmanagerapplet
       networkmanager-openvpn
       noto-fonts
-      pcloud
+      # pcloud
       pdfarranger
       picmi
       qt5ct
