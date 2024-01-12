@@ -31,6 +31,7 @@
     enable = true;
     historyControl = [ "erasedups" "ignoredups" ];
     initExtra = ''
+      . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       bind '"\e[A": history-search-backward'
       bind '"\eOA": history-search-backward'
       bind '"\e[B": history-search-forward'
