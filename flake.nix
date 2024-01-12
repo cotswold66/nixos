@@ -31,16 +31,14 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
         modules = [ 
-          ./home/john
-          ./home/john/desktop.nix
+          ./home/pluto
         ];
       };
       "john@saturn" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
         modules = [ 
-          ./home/john
-          ./home/john/server.nix
+          ./home/saturn
         ];
       };
     };
