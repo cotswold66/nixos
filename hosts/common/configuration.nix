@@ -36,10 +36,21 @@
   security.wrappers.restic = {
     source = "${pkgs.restic}/bin/restic";
     capabilities ="cap_dac_read_search=+ep";
-    owner = "root";
+    owner = "john";
     group = "users";
     permissions ="750";
   };
+
+  # services.restic.backups = {
+  #   local = {
+  #     user = "john";
+  #     repository = "/home/john/test";
+  #     initialize = true;
+  #     passwordFile = "";
+  #     paths = [ "/" ];
+  #     extraBackupArgs = [ "--exclude-file=/src/nixos/files/restic/excludes.txt" ];
+  #   };
+  # };
 
   programs.gnupg.agent = {
     enable = true;
