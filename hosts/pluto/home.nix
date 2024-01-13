@@ -3,11 +3,13 @@
 {
   imports =
     [ 
-      ../common
-      ../dconf
-      ../editors
-      ../email
-      ../browsers
+      ../common/home.nix
+      ../../apps/chromium.nix
+      ../../apps/dconf.nix
+      ../../apps/emacs.nix
+      ../../apps/notmuch.nix
+      ../../apps/sway.nix
+      ../../apps/vim.nix
     ];
 
   home = {
@@ -77,8 +79,8 @@
   };
 
   xdg.configFile = {
-    "chrome-flags.conf".source = ../files/chrome-flags.conf;
-    "electron-flags.conf".source = ../files/electron-flags.conf;
+    "chrome-flags.conf".source = ../../files/chrome-flags.conf;
+    "electron-flags.conf".source = ../../files/electron-flags.conf;
   };
 
   xdg.userDirs = {

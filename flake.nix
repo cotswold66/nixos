@@ -16,13 +16,13 @@
       "pluto" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/pluto
+          ./hosts/pluto/configuration.nix
         ];
       };
       "saturn" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/saturn
+          ./hosts/saturn/configuration.nix
         ];
       };
     };
@@ -31,14 +31,14 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
         modules = [ 
-          ./home/pluto
+          ./hosts/pluto/home.nix
         ];
       };
       "john@saturn" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
         modules = [ 
-          ./home/saturn
+          ./hosts/saturn/home.nix
         ];
       };
     };

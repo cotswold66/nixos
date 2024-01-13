@@ -21,7 +21,7 @@
     ];
     file = {
       ".local/bin/" = {
-        source = ../files/restic;
+        source = ../../files/restic;
         recursive = true;
       };
     };

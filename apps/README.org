@@ -1,0 +1,3 @@
+* Apps
+
+Contains home-manager modules of various apps
