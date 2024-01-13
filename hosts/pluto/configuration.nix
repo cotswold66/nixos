@@ -28,15 +28,10 @@
 
   imports = [
     ./hardware-configuration.nix
+    ../common/configuration.nix
   ];
 
-  users.users.john = {
-    isNormalUser = true;
-    description = "John Lord";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
-    packages = with pkgs; [
-    ];
-  };
+  users.users.john.extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
 
   # Use the grub EFI boot loader due to HiDPI screen
   boot = {
@@ -67,30 +62,12 @@
     networkmanager.enable = true;
   };
 
-  time.timeZone = "America/Chicago";
-
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
-  };
-  
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-
 
   console.useXkbConfig = true;
 
@@ -119,15 +96,6 @@
 
   security.polkit.enable = true;  
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    git
-    restic
-    virt-manager
-    wget
-  ];
   environment.gnome.excludePackages = (with pkgs; [
     gnome-photos
     gnome-tour
@@ -142,15 +110,6 @@
   ]);
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  security.wrappers.restic = {
-    source = "${pkgs.restic}/bin/restic";
-    capabilities ="cap_dac_read_search=+ep";
-    owner = "root";
-    group = "users";
-    permissions ="750";
-  };
-
-
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
@@ -163,11 +122,6 @@
   
   services.fwupd.enable = true;
   
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
   programs._1password-gui = {
     enable = true;
     polkitPolicyOwners = [ "john" ];
@@ -177,13 +131,6 @@
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
   };
   
   system.stateVersion = "23.11"; # Did you read the comment?
