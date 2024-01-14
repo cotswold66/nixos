@@ -47,6 +47,12 @@
       zoom-us
       zotero
     ];
+    pointerCursor = {
+      x11.enable = true;
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
+      size = 64;
+    };
     stateVersion = "23.11"; # Please read the comment before changing.
   };
 
