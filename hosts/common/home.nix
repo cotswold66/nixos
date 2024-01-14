@@ -19,12 +19,6 @@
       mosh
       rsync
     ];
-    file = {
-      ".local/bin/" = {
-        source = ../../files/restic;
-        recursive = true;
-      };
-    };
   };
 
   programs.bash = {

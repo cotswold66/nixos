@@ -9,20 +9,23 @@
       url = "github:cotswold66/base16-shell";
       flake = false;
     };
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
-  outputs = inputs @ { self, home-manager, nixpkgs, base16-shell, ... }: {
+  outputs = inputs @ { self, home-manager, nixpkgs, base16-shell, sops-nix, ... }: {
     nixosConfigurations = {
       "pluto" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./hosts/pluto/configuration.nix
+          sops-nix.nixosModules.sops
         ];
       };
       "saturn" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./hosts/saturn/configuration.nix
+          sops-nix.nixosModules.sops
         ];
       };
     };

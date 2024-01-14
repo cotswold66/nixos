@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+  };
+
   time.timeZone = "America/Chicago";
 
   i18n = {
@@ -27,35 +31,20 @@
   };
 
   environment.systemPackages = with pkgs; [
-    restic
+    # restic
     vim
     wget
     git
   ];
 
-  security.wrappers.restic = {
-    source = "${pkgs.restic}/bin/restic";
-    capabilities ="cap_dac_read_search=+ep";
-    owner = "john";
-    group = "users";
-    permissions ="750";
-  };
 
-  # services.restic.backups = {
-  #   local = {
-  #     user = "john";
-  #     repository = "/home/john/test";
-  #     initialize = true;
-  #     passwordFile = "";
-  #     paths = [ "/" ];
-  #     extraBackupArgs = [ "--exclude-file=/src/nixos/files/restic/excludes.txt" ];
-  #   };
-  # };
 
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
+
+  services.openssh.enable = true;
 
   nix = {
     package = pkgs.nixFlakes;

@@ -29,6 +29,7 @@
   imports = [
     ./hardware-configuration.nix
     ../common/configuration.nix
+    ./restic.nix
   ];
 
   users.users.john.extraGroups = [ "networkmanager" "wheel" "libvirtd" ];

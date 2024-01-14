@@ -40,7 +40,6 @@
       pdfarranger
       picmi
       qt5ct
-      restic
       roboto
       telegram-desktop
       wl-clipboard
