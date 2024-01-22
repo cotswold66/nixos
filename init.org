@@ -833,8 +833,12 @@ Use =dired-rsync= for rsync functionality in dired mode.
 #+end_src
 
 * Python
+:PROPERTIES:
+:header-args: :tangle no
+:END:
+
 #+name: python
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (use-package elpy
     :init
     (elpy-enable)
@@ -849,7 +853,7 @@ Use =dired-rsync= for rsync functionality in dired mode.
 #+end_src
 
 #+name: ein
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (use-package ein
     :ensure t) 
 #+end_src
@@ -867,7 +871,7 @@ Use =dired-rsync= for rsync functionality in dired mode.
 #+end_src
 * Clojure
 :PROPERTIES:
-# :header-args: :tangle no
+:header-args: :tangle no
 :END:
 
 #+begin_src emacs-lisp 
