@@ -41,6 +41,7 @@
       picmi
       qt5ct
       roboto
+      scummvm
       telegram-desktop
       wl-clipboard
       xorg.xlsclients
