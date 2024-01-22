@@ -43,6 +43,7 @@
       roboto
       scummvm
       telegram-desktop
+      virt-manager
       wl-clipboard
       xorg.xlsclients
       zoom-us
