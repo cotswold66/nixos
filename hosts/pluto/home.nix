@@ -78,7 +78,7 @@
     sessionVariables = {
       LESS = "-R";
       QT_QPA_PLATFORM = "wayland";
-      QT_QPA_PLATFORMTHEME = "qt5ct";
+      # QT_QPA_PLATFORMTHEME = "qt5ct";
       SSH_AUTH_SOCK=/run/user/1000/keyring/ssh; # Needed for magit
       VDPAU_DRIVER = "va_gl";
       VISUAL = "emacsclient -c";
