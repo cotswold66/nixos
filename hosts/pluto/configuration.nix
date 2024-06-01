@@ -54,12 +54,12 @@
 
   console.useXkbConfig = true;
 
-  services.xserver.layout = "dk";
+  services.xserver.xkb.layout = "dk";
 
   # Enable printing
   services.printing.enable = true;
   services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services.avahi.nssmdns4 = true;
   services.avahi.openFirewall = true;
 
   # Enable sound.
@@ -80,6 +80,7 @@
   security.polkit.enable = true;  
 
   environment.gnome.excludePackages = (with pkgs; [
+    gedit
     gnome-photos
     gnome-tour
     power-profiles-daemon
@@ -87,7 +88,6 @@
     gnome-calendar
     gnome-contacts
     gnome-music
-    gedit # text editor
     epiphany # web browser
     geary # email reader
   ]);

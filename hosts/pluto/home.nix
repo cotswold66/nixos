@@ -83,6 +83,7 @@
       VDPAU_DRIVER = "va_gl";
       VISUAL = "emacsclient -c";
       EDITOR = "emacsclient -c";
+      GTK_THEME = "Adwaita:dark";
     };
   };
 
