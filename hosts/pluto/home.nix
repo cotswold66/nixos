@@ -5,7 +5,7 @@
     [ 
       ../common/home.nix
       ../../apps/chromium.nix
-      ../../apps/dconf.nix
+      # ../../apps/dconf.nix
       ../../apps/emacs.nix
       ../../apps/notmuch.nix
       ../../apps/sway.nix
@@ -18,6 +18,7 @@
       # brave
       # dconf2nix
       digikam
+      exiftool
       firefox
       font-awesome
       gimp
@@ -46,6 +47,7 @@
       virt-manager
       wl-clipboard
       xorg.xlsclients
+      xournalpp
       zoom-us
       zotero
     ];
@@ -83,7 +85,6 @@
       VDPAU_DRIVER = "va_gl";
       VISUAL = "emacsclient -c";
       EDITOR = "emacsclient -c";
-      GTK_THEME = "Adwaita:dark";
     };
   };
 
