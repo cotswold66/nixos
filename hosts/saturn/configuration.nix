@@ -15,6 +15,12 @@
   networking.hostName = "saturn"; # Define your hostname.
   networking.hostId = "deadbeef";
   networking.firewall.allowedTCPPorts = [ 22 32400 ];
+  networking.interfaces.eno1.ipv4.addresses = [ {
+    address = "192.168.1.2";
+    prefixLength = 24;
+  }];
+  networking.defaultGateway = "192.168.1.1";
+  networking.nameservers = [ "8.8.8.8" ];
 
   virtualisation = {
     # containers.storage.settings = {
