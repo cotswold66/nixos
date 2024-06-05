@@ -58,33 +58,33 @@
             "plex-transcode:/transcode"
           ];
         };
-        "unifi" = {
-          extraOptions = [ "--network=macnet" "--ip=192.168.1.15" ];
-          hostname = "unifi";
-          image = "lscr.io/linuxserver/unifi-controller:latest";
-          autoStart = true;
-          environment = {
-            TZ = "America/Chicago";
-            PUID = "1000";
-            PGID = "1000";
-          };
-          volumes = [
-            "unifi:/config"
-          ];
-        };
-        "pihole" = {
-          extraOptions = [ "--network=macnet" "--ip=192.168.1.6" ];
-          hostname = "pihole";
-          image = "pihole/pihole:latest";
-          autoStart = true;
-          environment = {
-            TZ = "America/Chicago";
-          };
-          volumes = [
-            "pihole-etc:/etc/pihole"
-            "dnsmasq-etc:/etc/dnsmasq.d"
-          ];
-        };
+        # "unifi" = {
+        #   extraOptions = [ "--network=macnet" "--ip=192.168.1.15" ];
+        #   hostname = "unifi";
+        #   image = "lscr.io/linuxserver/unifi-controller:latest";
+        #   autoStart = true;
+        #   environment = {
+        #     TZ = "America/Chicago";
+        #     PUID = "1000";
+        #     PGID = "1000";
+        #   };
+        #   volumes = [
+        #     "unifi:/config"
+        #   ];
+        # };
+        # "pihole" = {
+        #   extraOptions = [ "--network=macnet" "--ip=192.168.1.6" ];
+        #   hostname = "pihole";
+        #   image = "pihole/pihole:latest";
+        #   autoStart = true;
+        #   environment = {
+        #     TZ = "America/Chicago";
+        #   };
+        #   volumes = [
+        #     "pihole-etc:/etc/pihole"
+        #     "dnsmasq-etc:/etc/dnsmasq.d"
+        #   ];
+        # };
         "rest-server" = {
           ports = [ "8000:8000" ];
           hostname = "rest-server";
